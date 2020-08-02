@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [self registerDate:@"30-02-2020"subscribeTrialDays:7];
+    [self registerDate:@"31-07-2020"subscribeTrialDays:30];
 
     return YES;
 }
@@ -44,13 +44,15 @@
         NSLog(@"\n! ! ! Введите корректную дату регистрации ! ! !");
     }
     
-    
     NSUInteger subscribeDays = trialDays;
     if (subscribeDays < rangeDaysToOff.day) {
         NSLog(@"\nBad news");
     } else if (subscribeDays > rangeDaysToOff.day) {
         NSLog(@"\nYour subscription expires after = %lu days", (subscribeDays-rangeDaysToOff.day));
+        NSDate* offDay = [calendar dateByAddingUnit:NSCalendarUnitDay value:(subscribeDays - rangeDaysToOff.day) toDate:[NSDate date] options:0];
+        NSLog(@"\nSubscription take off = %@", [dateFormatter stringFromDate:offDay] );
     }
+    
 }
 
 #pragma mark - UISceneSession lifecycle
